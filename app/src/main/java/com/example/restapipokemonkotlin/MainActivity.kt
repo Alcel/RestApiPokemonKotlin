@@ -5,16 +5,27 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.restapipokemonkotlin.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewModel:PokeInfoViewModel
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding=ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        var textito=""
         viewModel= ViewModelProvider(this).get(PokeInfoViewModel::class.java)
-        viewModel.getPokemonInfo(67)
+        viewModel.getPokemonInfo(69)
         viewModel.pokemonInfo.observe(this, Observer {
-            println(it.name)
+            textito=it.name
+            println(textito)
+            binding.texto.text=textito
+
         })
+
+
+
+
     }
 }
